@@ -1,0 +1,29 @@
+{
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/pg": "^8.10.9",
+    "drizzle-kit": "^0.20.6",
+    "nodemon": "^3.0.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.6.0",
+    "drizzle-orm": "^0.29.1",
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3",
+    "prettier": "^3.1.0",
+    "zod": "^3.22.4"
+  },
+  "name": "eddaverse",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --env-file=.env ./dist/app.js",
+    "dev": "nodemon -L -e ts --exec \"npm run build && npm start\"",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
