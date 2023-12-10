@@ -6,10 +6,11 @@ FROM node:21.4.0-alpine3.17
 WORKDIR /usr/src/app
 
 # Copies package.json, package-lock.json, tsconfig.json, .env to the root of WORKDIR
-COPY ["package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
+COPY ["drizzle.config.ts", "package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
 
 # Copies everything in the src directory to WORKDIR/src
 COPY ./src ./src
+COPY ./db ./db
 
 # Installs all packages
 RUN npm install
