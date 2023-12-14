@@ -38,7 +38,7 @@ export const characters = pgTable('characters', {
     dialogueLines: integer('dialogueLines').notNull().default(0),
 })
 
-export const charactersRelations = relations(characters, ({ many }) => ({
+export const charactersRelations = relations(characters, ({ one, many }) => ({
     story: many(storiesToCharacters),
     scenes: many(storiesToCharacters),
 }))
@@ -133,3 +133,13 @@ export const insertStorySchema = createInsertSchema(stories)
 export const insertCharactersSchema = createInsertSchema(characters)
 export const insertScenesSchema = createInsertSchema(scenes)
 export const insertDecisionsSchema = createInsertSchema(decisions)
+
+//types
+
+export type User = typeof users.$inferSelect
+export type Story = typeof stories.$inferSelect
+export type Character = typeof characters.$inferSelect
+export type Scene = typeof scenes.$inferSelect
+export type Decision = typeof decisions.$inferSelect
+export type StoriesToCharacters = typeof storiesToCharacters.$inferSelect
+export type ScenesToCharacters = typeof scenesToCharacters.$inferSelect

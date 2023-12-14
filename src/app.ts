@@ -8,7 +8,7 @@ import { storyRouter } from './api/v1/routes/storyRoutes.js'
 import { characterRouter } from './api/v1/routes/characterRoutes.js'
 import { decisionRouter } from './api/v1/routes/decisionRoutes.js'
 import { sceneRouter } from './api/v1/routes/sceneRoutes.js'
-
+import * as schema from '../db/schemas.js'
 const app = express()
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +24,8 @@ app.use('/api/v1/decisions', decisionRouter)
 app.use('/api/v1/scenes', sceneRouter)
 
 const sql = postgres(env.NEON_DATABASE_URL, { max: 1 })
-const db = drizzle(sql)
+
+export const db = drizzle(sql, { schema })
 
 const runMigrations = async () =>
     await migrate(db, { migrationsFolder: './db/migrations' })
