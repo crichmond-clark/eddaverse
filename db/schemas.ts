@@ -34,8 +34,7 @@ export const storiesRelations = relations(stories, ({ many }) => ({
 export const characters = pgTable('characters', {
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 256 }).notNull(),
-    traits: varchar('traits', { length: 256 }).notNull(),
-    dialogueLines: integer('dialogueLines').notNull().default(0),
+    traits: json('traits').notNull().default([]),
 })
 
 export const charactersRelations = relations(characters, ({ one, many }) => ({
@@ -46,8 +45,8 @@ export const charactersRelations = relations(characters, ({ one, many }) => ({
 export const scenes = pgTable('scenes', {
     id: serial('id').primaryKey(),
     title: varchar('title', { length: 256 }).notNull(),
-    narrativeText: integer('words').notNull().default(0),
-    decisions: integer('order').notNull(),
+    narrativeText: text('narrativeText').notNull(),
+    decisions: json('decisions').notNull().default([]),
     story: integer('story')
         .references(() => stories.id)
         .notNull(),

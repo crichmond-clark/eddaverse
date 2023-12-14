@@ -8,6 +8,27 @@
       "when": 1702173157067,
       "tag": "0000_chunky_baron_strucker",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1702571049422,
+      "tag": "0001_brown_speed_demon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702572412085,
+      "tag": "0002_wakeful_sunfire",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1702575469769,
+      "tag": "0003_spicy_sway",
+      "breakpoints": true
     }
   ]
 }

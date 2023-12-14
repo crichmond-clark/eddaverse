@@ -1,19 +1,24 @@
-export const getAllDecisions = () => {
-    return
+import * as decision from '../database/decisions'
+
+export const getAllDecisions = async () => {
+    const decision_objects = await decision.getAllDecisions()
 }
 
-export const getDecisionById = () => {
-    return
+export const getDecisionById = async (decisionId: number) => {
+    const decision_objects = await decision.getDecisionById(decisionId)
 }
 
-export const createDecision = () => {
-    return
+export const createDecision = async (decision: any) => {
+    const decision_objects = await decision.createDecision(decision)
 }
 
-export const updateDecisionById = () => {
-    return
+export const updateDecisionById = async (decisionId: number, decision: any) => {
+    const decision_objects = await decision.updateDecisionById(
+        decisionId,
+        decision
+    )
 }
 
-export const deleteDecisionById = () => {
-    return
+export const deleteDecisionById = async (decisionId: number) => {
+    const decision_objects = await decision.deleteDecisionById(decisionId)
 }
