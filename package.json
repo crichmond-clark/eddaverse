@@ -7,6 +7,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "daisyui": "^4.4.20",
     "drizzle-orm": "^0.29.1",
     "drizzle-zod": "^0.5.1",
     "express": "^4.18.2",

@@ -7,7 +7,7 @@ export const getAllUsers = async () => {
     return await db.select().from(users)
 }
 
-export const getUserById = async (userIds: number): Promise<User[]> => {
+export const getUserById = async (userIds: string): Promise<User[]> => {
     try {
         const user = await db.select().from(users).where(eq(users.id, userIds))
         return user
@@ -26,7 +26,7 @@ export const createUser = async (user: User) => {
 }
 
 export const updateUserById = async (
-    userId: number,
+    userId: string,
     attributes: User
 ): Promise<void> => {
     try {
@@ -37,7 +37,7 @@ export const updateUserById = async (
     return
 }
 
-export const deleteUserById = async (userId: number): Promise<void> => {
+export const deleteUserById = async (userId: string): Promise<void> => {
     try {
         await db.delete(users).where(eq(users.id, userId))
     } catch (error) {

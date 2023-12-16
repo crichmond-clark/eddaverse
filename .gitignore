@@ -3,3 +3,5 @@ dist/
 dist/src/api/v1/controllers/storyControllers.js
 dist/src/api/v1/controllers/characterControllers.js
 dist/src/api/v1/controllers/decisionControllers.js
+fontend
+

@@ -12,6 +12,7 @@ import { userRouter } from './api/v1/routes/userRoutes.js'
 import * as schema from '../db/schemas.js'
 const app = express()
 
+//entry point
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
     res.send('home')
 })
@@ -19,12 +20,15 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 app.listen(env.PORT, () => {
     console.log(`Server is running at ${env.PORT}`)
 })
+
+//routes
 app.use('/api/v1/stories', storyRouter)
 app.use('/api/v1/characters', characterRouter)
 app.use('/api/v1/decisions', decisionRouter)
 app.use('/api/v1/scenes', sceneRouter)
 app.use('/api/v1/users', userRouter)
 
+//database
 const sql = postgres(env.NEON_DATABASE_URL, { max: 1 })
 
 export const db = drizzle(sql, { schema })

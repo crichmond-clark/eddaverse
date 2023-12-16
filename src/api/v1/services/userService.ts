@@ -5,7 +5,7 @@ export const getAllUsers = async () => {
     return user_objects
 }
 
-export const getUserById = async (userId: number) => {
+export const getUserById = async (userId: string) => {
     const user_objects = await users.getUserById(userId)
     return user_objects
 }
@@ -15,12 +15,12 @@ export const createUser = async (user: any) => {
     return user_objects
 }
 
-export const updateUserById = async (userId: number, user: any) => {
+export const updateUserById = async (userId: string, user: any) => {
     const user_objects = await users.updateUserById(userId, user)
     return user_objects
 }
 
-export const deleteUserById = async (userId: number) => {
+export const deleteUserById = async (userId: string) => {
     const user_objects = await users.deleteUserById(userId)
     return user_objects
 }

@@ -13,7 +13,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
     try {
-        const userId = parseInt(req.params.userId)
+        const userId = req.params.userId
         const user = await userService.getUserById(userId)
         return res.json(user)
     } catch (error) {
@@ -39,7 +39,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const updateUserById = async (req: Request, res: Response) => {
     try {
-        const userId = parseInt(req.params.userId)
+        const userId = req.params.userId
         const attributes = req.body.user
         const user = await userService.updateUserById(userId, attributes)
         return res.json(user)
@@ -51,7 +51,7 @@ export const updateUserById = async (req: Request, res: Response) => {
 
 export const deleteUserById = async (req: Request, res: Response) => {
     try {
-        const userId = parseInt(req.params.userId)
+        const userId = req.params.userId
         const user = await userService.deleteUserById(userId)
         return res.json(user)
     } catch (error) {

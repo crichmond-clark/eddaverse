@@ -12,17 +12,40 @@ import {
 } from 'drizzle-orm/pg-core'
 
 //model tables
-export const users = pgTable('users', {
-    id: serial('id').primaryKey(),
-    email: varchar('email', { length: 256 }).notNull(),
-    name: varchar('name', { length: 256 }).notNull(),
-    createdAt: timestamp('createdAt').notNull().defaultNow(),
+export const users = pgTable('user', {
+    id: text('id').notNull().primaryKey(),
+    name: text('name'),
+    email: text('email').notNull(),
+    emailVerified: timestamp('emailVerified', { mode: 'date' }),
+    image: text('image'),
 })
 
-export const stories = pgTable('stories', {
+export const accounts = pgTable(
+    'account',
+    {
+        userId: text('userId')
+            .notNull()
+            .references(() => users.id, { onDelete: 'cascade' }),
+        type: text('type').notNull(),
+        provider: text('provider').notNull(),
+        providerAccountId: text('providerAccountId').notNull(),
+        refresh_token: text('refresh_token'),
+        access_token: text('access_token'),
+        expires_at: integer('expires_at'),
+        token_type: text('token_type'),
+        scope: text('scope'),
+        id_token: text('id_token'),
+        session_state: text('session_state'),
+    },
+    (account) => ({
+        compoundKey: primaryKey(account.provider, account.providerAccountId),
+    })
+)
+
+export const stories = pgTable('story', {
     id: serial('id').primaryKey(),
     title: varchar('title', { length: 256 }).notNull(),
-    author: integer('author')
+    author: text('author')
         .references(() => users.id)
         .notNull(),
 })
@@ -31,7 +54,7 @@ export const storiesRelations = relations(stories, ({ many }) => ({
     characters: many(storiesToCharacters),
 }))
 
-export const characters = pgTable('characters', {
+export const characters = pgTable('character', {
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 256 }).notNull(),
     traits: json('traits').notNull().default([]),
@@ -42,13 +65,12 @@ export const charactersRelations = relations(characters, ({ one, many }) => ({
     scenes: many(storiesToCharacters),
 }))
 
-export const scenes = pgTable('scenes', {
+export const scenes = pgTable('scene', {
     id: serial('id').primaryKey(),
     title: varchar('title', { length: 256 }).notNull(),
     narrativeText: text('narrativeText').notNull(),
-    decisions: json('decisions').notNull().default([]),
     story: integer('story')
-        .references(() => stories.id)
+        .references(() => stories.id, { onDelete: 'cascade' })
         .notNull(),
 })
 
@@ -56,7 +78,7 @@ export const scenesRelations = relations(scenes, ({ many }) => ({
     characters: many(storiesToCharacters),
 }))
 
-export const decisions = pgTable('decisions', {
+export const decisions = pgTable('decision', {
     id: serial('id').primaryKey(),
     text: text('text').notNull(),
     options: json('options').notNull(),
