@@ -7,7 +7,9 @@ export const getAllCharacters = async () => {
 
 export const getCharacterById = async (characterId: number) => {
     const character_objects = await characters.getCharacterById(characterId)
-    return character_objects
+    if (character_objects) {
+        return character_objects[0]
+    }
 }
 
 export const createCharacter = async (character: any) => {

@@ -7,7 +7,7 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (userId: string) => {
     const user_objects = await users.getUserById(userId)
-    return user_objects
+    return user_objects[0]
 }
 
 export const createUser = async (user: any) => {

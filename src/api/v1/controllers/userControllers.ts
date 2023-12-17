@@ -59,3 +59,17 @@ export const deleteUserById = async (req: Request, res: Response) => {
         return res.status(500).json({ error: 'invalid user id' })
     }
 }
+
+export const createUserAndAccount = async (req: Request, res: Response) => {
+    try {
+        const newUser = {
+            name: req.body.name,
+            email: req.body.email,
+        }
+        const user = await userService.createUser(newUser)
+        return res.json({ message: 'User created', user: newUser })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: 'User not created' })
+    }
+}

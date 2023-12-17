@@ -6,6 +6,7 @@ const envSchema = z.object({
         .default('production'),
     PORT: z.string(),
     NEON_DATABASE_URL: z.string(),
+    JWT_SECRET: z.string(),
 })
 
 const parsed = envSchema.safeParse(process.env)

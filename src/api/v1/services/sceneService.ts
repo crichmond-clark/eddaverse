@@ -6,6 +6,9 @@ export const getAllScenes = async () => {
 
 export const getSceneById = async (scenesId: number) => {
     const scene_objects = await scenes.getSceneById(scenesId)
+    if (scene_objects) {
+        return scene_objects[0]
+    }
 }
 
 export const createScene = async (scenes: any) => {

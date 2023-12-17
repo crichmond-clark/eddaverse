@@ -1,6 +1,7 @@
 import { db } from '../../../app'
 import { scenes } from '../../../../db/schemas'
 import { eq } from 'drizzle-orm'
+import { insertSceneSchema } from '../../../../db/schemas'
 import type { Scene } from '../../../../db/schemas'
 
 export const getAllScenes = async () => {
@@ -17,7 +18,8 @@ export const getSceneById = async (scene: number) => {
 
 export const createScene = async (scene: Scene) => {
     try {
-        return await db.insert(scenes).values(scene)
+        const validated_scene = insertSceneSchema.parse(scene)
+        return await db.insert(scenes).values(validated_scene)
     } catch (error) {
         console.log(error)
     }

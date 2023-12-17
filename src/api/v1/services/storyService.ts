@@ -6,6 +6,9 @@ export const getAllStories = async () => {
 
 export const getStoryById = async (storiesId: number) => {
     const story_objects = await stories.getStoryById(storiesId)
+    if (story_objects) {
+        return story_objects[0]
+    }
 }
 
 export const createStory = async (stories: any) => {

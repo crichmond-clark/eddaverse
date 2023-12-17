@@ -6,6 +6,9 @@ export const getAllDecisions = async () => {
 
 export const getDecisionById = async (decisionId: number) => {
     const decision_objects = await decision.getDecisionById(decisionId)
+    if (decision_objects) {
+        return decision_objects[0]
+    }
 }
 
 export const createDecision = async (decision: any) => {

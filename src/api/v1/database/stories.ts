@@ -1,6 +1,7 @@
 import { db } from '../../../app'
 import { stories } from '../../../../db/schemas'
 import { eq } from 'drizzle-orm'
+import { insertStorySchema } from '../../../../db/schemas'
 import type { Story } from '../../../../db/schemas'
 
 export const getAllStories = async () => {
@@ -9,7 +10,11 @@ export const getAllStories = async () => {
 
 export const getStoryById = async (story: number) => {
     try {
-        return await db.select().from(stories).where(eq(stories.id, story))
+        const storyArray = await db
+            .select()
+            .from(stories)
+            .where(eq(stories.id, story))
+        return storyArray
     } catch (error) {
         console.log(error)
     }
@@ -17,7 +22,8 @@ export const getStoryById = async (story: number) => {
 
 export const createStory = async (story: Story) => {
     try {
-        return await db.insert(stories).values(story)
+        const validated_story = insertStorySchema.parse(story)
+        return await db.insert(stories).values(validated_story)
     } catch (error) {
         console.log(error)
     }

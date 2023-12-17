@@ -1,6 +1,7 @@
 import { db } from '../../../app'
 import { characters } from '../../../../db/schemas'
 import { eq } from 'drizzle-orm'
+import { insertCharacterSchema } from '../../../../db/schemas'
 import type { Character } from '../../../../db/schemas'
 
 export const getAllCharacters = async () => {
@@ -24,7 +25,8 @@ export const getCharacterById = async (
 
 export const createCharacter = async (character: Character) => {
     try {
-        return await db.insert(characters).values(character)
+        const validated_character = insertCharacterSchema.parse(character)
+        validated_character
     } catch (error) {
         console.log(error)
     }

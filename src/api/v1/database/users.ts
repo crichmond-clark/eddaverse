@@ -1,6 +1,7 @@
 import { db } from '../../../app'
 import { users } from '../../../../db/schemas'
 import { eq } from 'drizzle-orm'
+import { insertUserSchema } from '../../../../db/schemas'
 import type { User } from '../../../../db/schemas'
 
 export const getAllUsers = async () => {
@@ -9,8 +10,11 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (userIds: string): Promise<User[]> => {
     try {
-        const user = await db.select().from(users).where(eq(users.id, userIds))
-        return user
+        const userArray = await db
+            .select()
+            .from(users)
+            .where(eq(users.id, userIds))
+        return userArray
     } catch (error) {
         console.log(error)
     }
@@ -19,7 +23,8 @@ export const getUserById = async (userIds: string): Promise<User[]> => {
 
 export const createUser = async (user: User) => {
     try {
-        return await db.insert(users).values(user)
+        const validated_user = insertUserSchema.parse(user)
+        return await db.insert(users).values(validated_user)
     } catch (error) {
         console.log(error)
     }

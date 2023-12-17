@@ -1,6 +1,7 @@
 import { db } from '../../../app'
 import { decisions } from '../../../../db/schemas'
 import { eq } from 'drizzle-orm'
+import { insertDecisionSchema } from '../../../../db/schemas'
 import type { Decision } from '../../../../db/schemas'
 
 export const getAllDecisions = async () => {
@@ -20,7 +21,8 @@ export const getDecisionById = async (decisionId: number) => {
 
 export const createDecision = async (decision: Decision) => {
     try {
-        return await db.insert(decisions).values(decision)
+        const validated_decision = insertDecisionSchema.parse(decision)
+        return await db.insert(decisions).values(validated_decision)
     } catch (error) {
         console.log(error)
     }
